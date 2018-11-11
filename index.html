@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>The Psychic Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./assets/css/reset.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./assets/css/style.css"
+    />
+    <script src="./assets/javascript/game.js"></script>
+  </head>
+
+  <body>
+    <h1>The Psychic Game</h1>
+    <br />
+    <p>Guess what letter I am thinking of</p>
+    <br />
+    <div id="wins">Wins:</div>
+    <br />
+    <div id="losses">Losses:</div>
+    <br />
+    <div id="guesses-left">Guesses Left:</div>
+    <br />
+    <div id="your-guesses">Your Guesses So Far:</div>
+    <br />
+
+    <script type="text/javascript">
+      // This array holds the letter chosen by the user
+
+      var compLetters = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z"
+      ];
+
+      var userInput = [];
+
+      var userGuesses = 15;
+
+      var userLosses = 1;
+
+      var userWins = 1;
+
+      var lettersPressed = "";
+
+      // var chosenLetters = compLetters[Math.floor(Math.random() * compLetters.length)];
+
+      //user presses key
+
+      document.onkeyup = function(event) {
+        lettersPressed = lettersPressed + event.key;
+
+        var chosenLetters =
+          compLetters[Math.floor(Math.random() * compLetters.length)];
+
+        console.log(chosenLetters);
+
+        document.getElementById("your-guesses").textContent =
+          "Your Guesses So Far :" + lettersPressed;
+
+        //make a condition if userInput will 9 times
+
+        if (userGuesses > 0) {
+          document.getElementById("guesses-left").textContent =
+            "Guesses Left :" + userGuesses;
+
+          userGuesses--;
+
+          console.log(userGuesses);
+        } else {
+          userGuesses = 26;
+
+          alert("nope! try again!");
+
+          document.getElementById("guesses-left").textContent =
+            "Guesses Left :" + userGuesses;
+
+          console.log(userGuesses);
+        }
+
+        if (event.key === chosenLetters) {
+          document.getElementById("wins").textContent = "Wins :" + userWins;
+
+          userWins++;
+
+          alert("you win");
+        } else if (event.key === chosenLetters - userGuesses) {
+          document.getElementById("losses").textContent =
+            "Losses :" + userLosses;
+
+          userLosses++;
+
+          alert("nope! try again");
+        }
+      };
+    </script>
+  </body>
+</html>
